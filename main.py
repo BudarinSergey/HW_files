@@ -19,5 +19,29 @@ with open("recipe1.txt", 'r', encoding="utf-8") as file1:
 
             recept.append(quan_ingr)
         file1.readline()
+pprint(cook_book)
+print("***************************")
 
-    pprint(cook_book)
+
+# pprint(cook_book['Омлет'])
+
+def get_shop_list_by_dishes(dishes1, person_count):
+    result = {}
+    for dish in dishes1:
+
+        ingrid = cook_book[dish]
+        for ingr1 in ingrid:
+            if ingr1['ingredient_name'] not in result.keys():
+                ingr_name = ingr1['ingredient_name']
+                ingr_quantity = int(ingr1['quantity'])* person_count
+                ingr_measure = ['measure']
+            else:
+                ingr_quantity += int(ingr1['quantity']) * person_count
+
+            result[ingr_name] = {'quantity': ingr_quantity, 'measure' : ingr_measure}
+
+    return result
+
+
+
+pprint(get_shop_list_by_dishes(['Фахитос', 'Омлет'], 2))
