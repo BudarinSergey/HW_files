@@ -64,11 +64,13 @@ def reading_file(path):
     for file2 in files:
         with open(file2, 'r', encoding="utf-8") as file3:
             list_lines = []
+            quant_lines = 0
             for line in file3:
-                 list_lines.append(line)
-            result1[file2] = list_lines
+                list_lines.append(line.strip())
+                quant_lines += 1
+            result1[file2] = [quant_lines,list_lines]
 
-    sortedDict = sorted(result1.items(), key=lambda x: x[1], reverse=True)
+    sortedDict = sorted(result1.items(), key=lambda x: x[1])
     return sortedDict
 
 pprint(reading_file(full_path))
