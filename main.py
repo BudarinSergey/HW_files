@@ -1,4 +1,6 @@
 from pprint import pprint
+import os
+
 
 cook_book = {}
 
@@ -42,6 +44,33 @@ def get_shop_list_by_dishes(dishes1, person_count):
 
     return result
 
-
-
 pprint(get_shop_list_by_dishes(['Фахитос', 'Омлет'], 2))
+
+print('-------------------------')
+
+
+
+
+BASE_PATH = os.getcwd()
+HW_DIR_NAME = 'sorted1'
+full_path = os.path.join(BASE_PATH, HW_DIR_NAME)
+print(full_path)
+
+
+def reading_file(path):
+    result1 = {}
+    files = os.listdir(path)
+    os.chdir(full_path)
+    for file2 in files:
+        with open(file2, 'r', encoding="utf-8") as file3:
+            list_lines = []
+            for line in file3:
+                 list_lines.append(line)
+            result1[file2] = list_lines
+
+    sortedDict = sorted(result1.items(), key=lambda x: x[1], reverse=True)
+    return sortedDict
+
+pprint(reading_file(full_path))
+
+
